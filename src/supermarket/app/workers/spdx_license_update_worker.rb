@@ -1,8 +1,7 @@
 class SpdxLicenseUpdateWorker
   include Sidekiq::Worker
-  require "pry"
+
   def perform(json_data, cookbook_version_id)
-    # binding.pry
     cookbook_version = CookbookVersion.find(cookbook_version_id.to_i)
     spdx_record = json_data.select { |record| record["licenseId"] == cookbook_version.license }
     if spdx_record.present?

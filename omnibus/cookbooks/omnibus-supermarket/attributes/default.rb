@@ -487,3 +487,6 @@ default['supermarket']['smtp_user_name'] = nil
 # If these are present, metrics can be reported to a StatsD server.
 default['supermarket']['statsd_url'] = nil
 default['supermarket']['statsd_port'] = nil
+
+# link to fetch spdx data from
+default['supermarket']['spdx_license_url'] = nil
