@@ -28,9 +28,7 @@ describe "cookbooks/show.html.erb" do
 
     let!(:collaborator) { create(:cookbook_collaborator, resourceable: cookbook, user: create(:user)) }
 
-    require "pry"
     before(:each) do
-      # binding.pry
       allow(view).to receive(:policy) do |record|
         Pundit.policy(current_user, record)
       end
