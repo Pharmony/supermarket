@@ -13,7 +13,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:9
         ports: ["5432:5432"]
         env:
           POSTGRES_USER: postgres
@@ -25,11 +25,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up ruby 2.7.4
+      - name: Set up ruby 2.7
         uses: ruby/setup-ruby@v1
         with:
           working-directory: src/supermarket
-          ruby-version: 2.7.4
+          ruby-version: 2.7
           bundler-cache: true
       - uses: r7kamura/rubocop-problem-matchers-action@v1 # this shows the failures in the PR
       - name: create database schema
@@ -47,13 +47,19 @@ jobs:
         env:
           RAILS_ENV: test
         working-directory: src/supermarket
+      - name: Simplecov Report
+        uses: aki77/simplecov-report-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          failedThreshold: 90
+          resultPath: src/supermarket/coverage/.last_run.json
 
   fieri:
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:9
         ports: ["5432:5432"]
         env:
           POSTGRES_USER: postgres
@@ -65,11 +71,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up ruby 2.7.4
+      - name: Set up ruby 2.7
         uses: ruby/setup-ruby@v1
         with:
           working-directory: src/supermarket/engines/fieri
-          ruby-version: 2.7.4
+          ruby-version: 2.7
           bundler-cache: true
       - uses: r7kamura/rubocop-problem-matchers-action@v1 # this shows the failures in the PR
       - name: run specs
