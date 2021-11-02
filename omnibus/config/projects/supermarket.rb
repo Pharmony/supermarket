@@ -29,7 +29,7 @@ build_version   IO.read(File.expand_path("../../../../VERSION", __FILE__)).strip
 build_iteration 1
 
 # NOTE: see the omnibus-supermarket cookbook gemfile for controlling the infra client version
-override :postgresql, version: '13.3'
+# override :postgresql, version: '13.3'
 override :chef, version: "17.5"
 override :ruby, version: "2.7.4"
 override :rubygems, version: "3.1.2" # rubygems ships its own bundler which may differ from bundler defined below and then we get double bundler which makes the omnibus environment unhappy. Make sure these versions match before bumping either.
